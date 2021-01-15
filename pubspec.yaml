@@ -33,6 +33,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icon/
+    - assets/menu/
 
   fonts:
     - family: fontNunitoSans
