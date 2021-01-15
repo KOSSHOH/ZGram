@@ -7,24 +7,33 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:messenger/src/app_theme.dart';
 import 'package:messenger/src/utils/styles.dart';
 import 'package:messenger/src/utils/utils.dart';
+import 'package:pinput/pin_put/pin_put.dart';
 
-class SignUpScreen extends StatefulWidget {
+class ResetPasswordScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _SignUpScreenState();
+    return _ResetPasswordScreenState();
   }
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
-  TextEditingController userNameController = TextEditingController();
-  TextEditingController mailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   bool loading = false;
-  bool _password = true;
 
-  void _toggle() {
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController passwordConfirmController = TextEditingController();
+
+  bool _password = true;
+  bool _passwordConfirm = true;
+
+  void _passwordToggle() {
     setState(() {
       _password = !_password;
+    });
+  }
+
+  void _passwordConfirmToggle() {
+    setState(() {
+      _passwordConfirm = !_passwordConfirm;
     });
   }
 
@@ -39,115 +48,53 @@ class _SignUpScreenState extends State<SignUpScreen> {
         children: [
           Container(
             margin: EdgeInsets.only(
-              top: 30,
+              top: 64,
               left: 25,
               right: 25,
+            ),
+            child: Row(
+              children: [
+                GestureDetector(
+                  child: SvgPicture.asset("assets/icon/arrow-left.svg"),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                SizedBox(width: 20),
+                Text(
+                  "Reset Password",
+                  style: Styles.boldH4(AppTheme.dark),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            width: double.infinity,
+            margin: EdgeInsets.only(
+              top: 50,
+            ),
+            child: Center(
+              child: Image.asset(
+                "assets/images/logo.png",
+              ),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(
+              left: 25,
+              right: 25,
+              top: 50,
             ),
             child: Text(
-              "Username",
-              style: Styles.semiBoldLabel(AppTheme.dark),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(
-              top: 15,
-              left: 25,
-              right: 25,
-            ),
-            child: Theme(
-              data: ThemeData(
-                platform: Platform.isAndroid
-                    ? TargetPlatform.android
-                    : TargetPlatform.iOS,
-              ),
-              child: Container(
-                height: 56,
-                padding: EdgeInsets.only(left: 15, right: 15, bottom: 3),
-                decoration: BoxDecoration(
-                  color: AppTheme.white,
-                  borderRadius: BorderRadius.circular(
-                    27.5,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      offset: Offset(0, 10),
-                      color: Color.fromRGBO(147, 147, 147, 0.1),
-                      blurRadius: 75,
-                      spreadRadius: 0,
-                    )
-                  ],
-                ),
-                child: Center(
-                  child: TextFormField(
-                    style: Styles.semiBoldDisplay(AppTheme.dark),
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "Create your username",
-                      hintStyle: Styles.regularDisplay(AppTheme.grey80),
-                    ),
-                    controller: userNameController,
-                  ),
-                ),
+              "Set your new password for your account so you can login and access all the features in Zelio App.",
+              style: Styles.regularLabel(
+                Color(0xFF616161),
               ),
             ),
           ),
           Container(
             margin: EdgeInsets.only(
-              top: 35,
-              left: 25,
-              right: 25,
-            ),
-            child: Text(
-              "Email",
-              style: Styles.semiBoldLabel(AppTheme.dark),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(
-              top: 15,
-              left: 25,
-              right: 25,
-            ),
-            child: Theme(
-              data: ThemeData(
-                platform: Platform.isAndroid
-                    ? TargetPlatform.android
-                    : TargetPlatform.iOS,
-              ),
-              child: Container(
-                height: 56,
-                padding: EdgeInsets.only(left: 15, right: 15, bottom: 3),
-                decoration: BoxDecoration(
-                  color: AppTheme.white,
-                  borderRadius: BorderRadius.circular(
-                    27.5,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      offset: Offset(0, 10),
-                      color: Color.fromRGBO(147, 147, 147, 0.1),
-                      blurRadius: 75,
-                      spreadRadius: 0,
-                    )
-                  ],
-                ),
-                child: Center(
-                  child: TextFormField(
-                    style: Styles.semiBoldDisplay(AppTheme.dark),
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "Enter your email",
-                      hintStyle: Styles.regularDisplay(AppTheme.grey80),
-                    ),
-                    controller: mailController,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(
-              top: 35,
+              top: 52,
               left: 25,
               right: 25,
             ),
@@ -201,7 +148,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           style: Styles.semiBoldDisplay(AppTheme.dark),
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: "Enter your password",
+                            hintText: "Enter your new password",
                             hintStyle: Styles.regularDisplay(AppTheme.grey80),
                           ),
                           controller: passwordController,
@@ -209,7 +156,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: _toggle,
+                      onTap: _passwordToggle,
                       child: Container(
                         height: 24,
                         width: 24,
@@ -223,30 +170,98 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
             ),
           ),
+          Container(
+            margin: EdgeInsets.only(
+              top: 40,
+              left: 25,
+              right: 25,
+            ),
+            child: Text(
+              "Confirm Password",
+              style: Styles.semiBoldLabel(AppTheme.dark),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(
+              top: 15,
+              left: 25,
+              right: 25,
+            ),
+            child: Theme(
+              data: ThemeData(
+                platform: Platform.isAndroid
+                    ? TargetPlatform.android
+                    : TargetPlatform.iOS,
+              ),
+              child: Container(
+                height: 56,
+                padding: EdgeInsets.only(
+                  left: 20,
+                  right: 25,
+                ),
+                decoration: BoxDecoration(
+                  color: AppTheme.white,
+                  borderRadius: BorderRadius.circular(
+                    27.5,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      offset: Offset(0, 10),
+                      color: Color.fromRGBO(147, 147, 147, 0.1),
+                      blurRadius: 75,
+                      spreadRadius: 0,
+                    )
+                  ],
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        padding: EdgeInsets.only(
+                          bottom: 3,
+                          right: 15,
+                        ),
+                        child: TextFormField(
+                          obscureText: _passwordConfirm,
+                          style: Styles.semiBoldDisplay(AppTheme.dark),
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: "Enter your new password",
+                            hintStyle: Styles.regularDisplay(AppTheme.grey80),
+                          ),
+                          controller: passwordConfirmController,
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: _passwordConfirmToggle,
+                      child: Container(
+                        height: 24,
+                        width: 24,
+                        child: _passwordConfirm
+                            ? SvgPicture.asset("assets/icon/eye.svg")
+                            : SvgPicture.asset("assets/icon/eye-off.svg"),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
           GestureDetector(
             onTap: () {
               if (!loading &&
-                  userNameController.text.length > 0 &&
                   passwordController.text.length > 0 &&
-                  mailController.text.length > 0) {
+                  passwordConfirmController.text.length > 0 &&
+                  (passwordConfirmController.text == passwordController.text)) {
                 setState(() {
                   loading = true;
                 });
-
                 Timer(Duration(milliseconds: 1500), () {
-                  Utils.saveData(
-                    userNameController.text,
-                    passwordController.text,
-                    mailController.text,
-                  );
-                  FocusScopeNode currentFocus = FocusScope.of(context);
-                  if (!currentFocus.hasPrimaryFocus) {
-                    currentFocus.unfocus();
-                  }
                   setState(() {
                     loading = false;
                   });
-                  ///next screen
+                  Navigator.of(context).popUntil((route) => route.isFirst);
                 });
               }
             },
@@ -254,7 +269,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               margin: EdgeInsets.only(
                 left: 25,
                 right: 25,
-                top: 50,
+                top: 45,
                 bottom: 69,
               ),
               height: 56,
@@ -278,7 +293,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             AlwaysStoppedAnimation<Color>(AppTheme.white),
                       )
                     : Text(
-                        "Login",
+                        "Reset Password",
                         style: Styles.boldButton(AppTheme.white),
                       ),
               ),

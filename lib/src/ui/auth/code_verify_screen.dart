@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:messenger/src/app_theme.dart';
+import 'package:messenger/src/ui/auth/reset_passwors_screen.dart';
 import 'package:messenger/src/utils/styles.dart';
 import 'package:messenger/src/utils/utils.dart';
 import 'package:pinput/pin_put/pin_put.dart';
@@ -62,7 +63,7 @@ class _CodeVerifyScreenState extends State<CodeVerifyScreen> {
                 ),
                 SizedBox(width: 20),
                 Text(
-                  "Forgot Password",
+                  "Code Verification",
                   style: Styles.boldH4(AppTheme.dark),
                 ),
               ],
@@ -86,7 +87,7 @@ class _CodeVerifyScreenState extends State<CodeVerifyScreen> {
               top: 50,
             ),
             child: Text(
-              "Enter your email for the verification proccess, and we will send 4 digits code to your email for the verification.",
+              "Enter the 4 digits code that you received on your email so you can continue to reset your account password.",
               style: Styles.regularLabel(
                 Color(0xFF616161),
               ),
@@ -103,7 +104,7 @@ class _CodeVerifyScreenState extends State<CodeVerifyScreen> {
             child: PinPut(
               fieldsCount: 4,
               onSubmit: (String pin) => {
-                print(pin),
+                /// pin
               },
               focusNode: _pinPutFocusNode,
               controller: _pinPutController,
@@ -128,8 +129,13 @@ class _CodeVerifyScreenState extends State<CodeVerifyScreen> {
                     loading = false;
                   });
                   _pinPutFocusNode.unfocus();
-
-                  ///
+                  _pinPutController.text = "";
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ResetPasswordScreen(),
+                    ),
+                  );
                 });
               }
             },
