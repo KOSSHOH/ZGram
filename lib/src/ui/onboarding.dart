@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:messenger/src/app_theme.dart';
+import 'package:messenger/src/ui/auth/auth_screen.dart';
+import 'package:messenger/src/utils/styles.dart';
 
 class OnBoarding extends StatefulWidget {
   @override
@@ -28,7 +30,7 @@ class _OnBoardingState extends State<OnBoarding> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppTheme.screen,
       body: Column(
         children: <Widget>[
           Expanded(
@@ -99,7 +101,12 @@ class _OnBoardingState extends State<OnBoarding> {
                         //_pageController.jumpToPage(2);
                       });
                     } else if (currentIndex == 2) {
-                      ///
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AuthScreen(),
+                        ),
+                      );
                     }
                   },
                   child: AnimatedContainer(
@@ -114,7 +121,7 @@ class _OnBoardingState extends State<OnBoarding> {
                     child: Center(
                       child: Text(
                         currentIndex == 2 ? "Get Started" : "Next",
-                        style: AppTheme.boldButton(AppTheme.white),
+                        style: Styles.boldButton(AppTheme.white),
                       ),
                     ),
                   ),
@@ -165,13 +172,13 @@ class _OnBoardingState extends State<OnBoarding> {
         ),
         Text(
           title,
-          style: AppTheme.boldH2(AppTheme.dark),
+          style: Styles.boldH2(AppTheme.dark),
         ),
         Container(
           child: Text(
             content,
             textAlign: TextAlign.center,
-            style: AppTheme.regularLabel(AppTheme.dark80),
+            style: Styles.regularLabel(AppTheme.dark80),
           ),
           margin: EdgeInsets.only(
             top: 18,
