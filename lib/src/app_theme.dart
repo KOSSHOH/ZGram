@@ -11,13 +11,14 @@ class AppTheme {
   ///app
   static const Color primary = Color(0xFF327FEB);
   static const Color dark = Color(0xFF383838);
-  static const Color black80 = Color.fromRGBO(56, 56, 56, 0.8);
-  static const Color black30 = Color.fromRGBO(56, 56, 56, 0.6);
-  static const Color black10 = Color.fromRGBO(56, 56, 56, 0.4);
+  static const Color dark80 = Color.fromRGBO(56, 56, 56, 0.8);
+  static const Color dark30 = Color.fromRGBO(56, 56, 56, 0.6);
+  static const Color dark10 = Color.fromRGBO(56, 56, 56, 0.4);
   static const Color grey = Color(0xFFA9A9A9);
   static const Color grey80 = Color.fromRGBO(169, 169, 169, 0.8);
-  static const Color grey30 = Color.fromRGBO(169, 169, 169, 0.6);
-  static const Color grey10 = Color.fromRGBO(169, 169, 169, 0.4);
+  static const Color grey60 = Color.fromRGBO(169, 169, 169, 0.6);
+  static const Color grey40 = Color.fromRGBO(169, 169, 169, 0.4);
+  static const Color grey20 = Color.fromRGBO(169, 169, 169, 0.2);
   static const Color success = Color(0xFF0AB97A);
   static const Color error = Color(0xFFF31629);
   static const Color white = Color(0xFFFFFFFF);
