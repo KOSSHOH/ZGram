@@ -7,6 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:messenger/src/app_theme.dart';
 import 'package:messenger/src/dialog/bottom_dialog.dart';
 import 'package:messenger/src/model/bus/loading_model.dart';
+import 'package:messenger/src/ui/auth/forgot_password_screen.dart';
 import 'package:messenger/src/utils/styles.dart';
 import 'package:messenger/src/utils/utils.dart';
 import 'package:rxbus/rxbus.dart';
@@ -187,7 +188,18 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              FocusScopeNode currentFocus = FocusScope.of(context);
+              if (!currentFocus.hasPrimaryFocus) {
+                currentFocus.unfocus();
+              }
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ForgotPasswordScreen(),
+                ),
+              );
+            },
             child: Container(
               margin: EdgeInsets.only(
                 top: 25,

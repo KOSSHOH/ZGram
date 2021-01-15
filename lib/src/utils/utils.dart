@@ -1,18 +1,16 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Utils {
-  static Future<void> saveData(
-    String name,
-    String password,
-    String mail,
-  ) async {
+  static Future<void> saveData(String name,
+      String password,
+      String mail,) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('name', name);
     prefs.setString('password', password);
     prefs.setString('mail', mail);
   }
 
-  static Future<bool> isLogin() async {
+  static Future<bool> isName() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (prefs.getString("name") != null) {
       return true;
@@ -21,10 +19,24 @@ class Utils {
     }
   }
 
+  static Future<bool> isMail(String mail) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.getString("mail") != null) {
+      if (prefs.getString("mail") == mail)
+        return true;
+      else
+        return false;
+    } else {
+      return false;
+    }
+  }
+
+
   static Future<bool> isLoginCheck(String name, String password) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (prefs.getString("name") != null) {
-      if (prefs.getString("name") == name &&
+      if ((prefs.getString("name") == name ||
+          prefs.getString("mail") == name) &&
           prefs.getString("password") == password)
         return true;
       else
