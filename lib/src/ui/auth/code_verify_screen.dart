@@ -5,20 +5,37 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:messenger/src/app_theme.dart';
-import 'package:messenger/src/ui/auth/code_verify_screen.dart';
 import 'package:messenger/src/utils/styles.dart';
 import 'package:messenger/src/utils/utils.dart';
+import 'package:pinput/pin_put/pin_put.dart';
 
-class ForgotPasswordScreen extends StatefulWidget {
+class CodeVerifyScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _ForgotPasswordScreenState();
+    return _CodeVerifyScreenState();
   }
 }
 
-class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
-  TextEditingController mailController = TextEditingController();
+class _CodeVerifyScreenState extends State<CodeVerifyScreen> {
   bool loading = false;
+
+  final TextEditingController _pinPutController = TextEditingController();
+  final FocusNode _pinPutFocusNode = FocusNode();
+
+  BoxDecoration get _pinPutDecoration {
+    return BoxDecoration(
+        borderRadius: BorderRadius.circular(10.0),
+        border: Border.all(
+          color: AppTheme.grey60,
+        ),
+        boxShadow: [
+          BoxShadow(
+              offset: Offset(0, 10),
+              blurRadius: 75,
+              spreadRadius: 0,
+              color: Color.fromRGBO(147, 147, 147, 0.1))
+        ]);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,86 +93,43 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(
+            color: Colors.white,
+            margin: const EdgeInsets.only(
+              left: 41,
+              right: 41,
               top: 52,
-              left: 25,
-              right: 25,
             ),
-            child: Text(
-              "Email",
-              style: Styles.semiBoldLabel(AppTheme.dark),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(
-              top: 15,
-              left: 25,
-              right: 25,
-            ),
-            child: Theme(
-              data: ThemeData(
-                platform: Platform.isAndroid
-                    ? TargetPlatform.android
-                    : TargetPlatform.iOS,
-              ),
-              child: Container(
-                height: 56,
-                padding: EdgeInsets.only(left: 15, right: 15, bottom: 3),
-                decoration: BoxDecoration(
-                  color: AppTheme.white,
-                  borderRadius: BorderRadius.circular(
-                    27.5,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      offset: Offset(0, 10),
-                      color: Color.fromRGBO(147, 147, 147, 0.1),
-                      blurRadius: 75,
-                      spreadRadius: 0,
-                    )
-                  ],
-                ),
-                child: Center(
-                  child: TextFormField(
-                    style: Styles.semiBoldDisplay(AppTheme.dark),
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "Enter your email",
-                      hintStyle: Styles.regularDisplay(AppTheme.grey80),
-                    ),
-                    controller: mailController,
-                  ),
-                ),
+            // padding: const EdgeInsets.all(20.0),
+            child: PinPut(
+              fieldsCount: 4,
+              onSubmit: (String pin) => {
+                print(pin),
+              },
+              focusNode: _pinPutFocusNode,
+              controller: _pinPutController,
+              submittedFieldDecoration: _pinPutDecoration,
+              selectedFieldDecoration: _pinPutDecoration,
+              followingFieldDecoration: _pinPutDecoration,
+              textStyle: Styles.boldH2(AppTheme.dark),
+              eachFieldConstraints: BoxConstraints(
+                minHeight: 61.0,
+                minWidth: 50.0,
               ),
             ),
           ),
           GestureDetector(
             onTap: () {
-              if (!loading && mailController.text.length > 0) {
+              if (!loading && _pinPutController.text.length == 4) {
                 setState(() {
                   loading = true;
                 });
-                FocusScopeNode currentFocus = FocusScope.of(context);
                 Timer(Duration(milliseconds: 1500), () {
                   setState(() {
                     loading = false;
                   });
-                  Utils.isMail(mailController.text).then((value) => {
-                        if (value)
-                          {
-                            if (!currentFocus.hasPrimaryFocus)
-                              {
-                                currentFocus.unfocus(),
-                              },
-                            mailController.text = "",
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => CodeVerifyScreen(),
-                              ),
-                            ),
-                          },
-                      });
+                  _pinPutFocusNode.unfocus();
+
+                  ///
                 });
               }
             },
@@ -163,7 +137,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               margin: EdgeInsets.only(
                 left: 25,
                 right: 25,
-                top: 50,
+                top: 45,
                 bottom: 69,
               ),
               height: 56,

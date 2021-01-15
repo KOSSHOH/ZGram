@@ -101,7 +101,7 @@ class _OnBoardingState extends State<OnBoarding> {
                         //_pageController.jumpToPage(2);
                       });
                     } else if (currentIndex == 2) {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                           builder: (context) => AuthScreen(),
