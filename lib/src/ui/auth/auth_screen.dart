@@ -142,7 +142,7 @@ class _AuthScreenState extends State<AuthScreen> {
               controller: _pageController,
               children: <Widget>[
                 LoginScreen(),
-                SignupScreen(),
+                SignUpScreen(),
               ],
             ),
           )
