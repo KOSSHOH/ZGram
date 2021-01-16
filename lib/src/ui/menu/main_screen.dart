@@ -3,6 +3,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:messenger/src/app_theme.dart';
 import 'package:messenger/src/ui/auth/login_screen.dart';
 import 'package:messenger/src/ui/auth/signup_screen.dart';
+import 'package:messenger/src/ui/menu/chat/chat_screen.dart';
+import 'package:messenger/src/ui/menu/explore/explore_screen.dart';
+import 'package:messenger/src/ui/menu/home/home_screen.dart';
+import 'package:messenger/src/ui/menu/profile/profile_screen.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -51,10 +55,10 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
           },
           controller: _pageController,
           children: <Widget>[
-            LoginScreen(),
-            LoginScreen(),
-            LoginScreen(),
-            SignUpScreen(),
+            HomeScreen(),
+            ExploreScreen(),
+            ChatScreen(),
+            ProfileScreen(),
           ],
         ),
       ),

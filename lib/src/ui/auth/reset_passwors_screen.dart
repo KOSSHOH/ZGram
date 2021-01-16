@@ -261,6 +261,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   setState(() {
                     loading = false;
                   });
+                  Utils.savePassword(passwordController.text);
                   Navigator.of(context).popUntil((route) => route.isFirst);
                 });
               }

@@ -21,6 +21,7 @@ dependencies:
   rxbus: ^0.0.2
   shared_preferences: ^0.5.7+3
   pinput: ^1.0.0
+  dotted_border: ^1.0.7
 
 dev_dependencies:
   flutter_test:
