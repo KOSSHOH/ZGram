@@ -1,6 +1,7 @@
 import 'package:messenger/src/model/home/comment_model.dart';
 
 class TapeModel {
+  int id;
   String userImage;
   String userName;
   String message;
@@ -11,6 +12,7 @@ class TapeModel {
   String time;
 
   TapeModel({
+    this.id,
     this.userImage,
     this.userName,
     this.message,

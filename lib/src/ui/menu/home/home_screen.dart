@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:messenger/src/app_theme.dart';
 import 'package:messenger/src/bloc/home_bloc.dart';
 import 'package:messenger/src/model/home/home_model.dart';
+import 'package:messenger/src/ui/menu/main_screen.dart';
 import 'package:messenger/src/utils/styles.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -14,7 +15,11 @@ class HomeScreen extends StatefulWidget {
   }
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen>
+    with AutomaticKeepAliveClientMixin<HomeScreen> {
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   void initState() {
     homeBloc.fetchAllHome();
@@ -23,14 +28,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    homeBloc.fetchAllHome();
     return Scaffold(
       backgroundColor: AppTheme.screen,
       body: Column(
         children: [
           Container(
             color: AppTheme.white,
-            height: 120,
+            height: 96,
             padding: EdgeInsets.only(
               left: 25,
               right: 25,
@@ -67,7 +71,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 stream: homeBloc.allHome,
                 builder: (context, AsyncSnapshot<HomeModel> snapshot) {
                   if (snapshot.hasData) {
-                    print("SSSSSS" + snapshot.data.story.length.toString());
                     return ListView(
                       padding: EdgeInsets.only(
                         top: 0,
@@ -174,6 +177,197 @@ class _HomeScreenState extends State<HomeScreen> {
                                     );
                             },
                           ),
+                        ),
+                        ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: snapshot.data.tape.length,
+                          padding: EdgeInsets.only(
+                            top: 0,
+                            bottom: 24,
+                          ),
+                          itemBuilder: (BuildContext ctxt, int index) {
+                            return GestureDetector(
+                              onDoubleTap: (){
+                                homeBloc.fetchUpdateFav(
+                                  index,
+                                  !snapshot
+                                      .data.tape[index].isFavourite,
+                                );
+                              },
+                              child: Container(
+                                margin: EdgeInsets.only(
+                                  top: 30,
+                                  left: 25,
+                                  right: 25,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: AppTheme.white,
+                                  borderRadius: BorderRadius.circular(
+                                    15,
+                                  ),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      child: Row(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                            height: 42,
+                                            width: 42,
+                                            margin: EdgeInsets.only(
+                                              right: 19.0,
+                                            ),
+                                            child: ClipRRect(
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(42),
+                                              ),
+                                              child: Image.asset(
+                                                snapshot
+                                                    .data.tape[index].userImage,
+                                                height: 42,
+                                                width: 42,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: Text(
+                                              snapshot.data.tape[index].userName,
+                                              style: Styles.boldDisplay(
+                                                AppTheme.dark,
+                                              ),
+                                            ),
+                                          ),
+                                          GestureDetector(
+                                            onTap: () {},
+                                            child: SvgPicture.asset(
+                                              "assets/icon/more-vertical.svg",
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      margin: EdgeInsets.only(
+                                        top: 17,
+                                        left: 15,
+                                        right: 19,
+                                      ),
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.only(
+                                        top: 17,
+                                        left: 20,
+                                        right: 20,
+                                      ),
+                                      height: 1,
+                                      color: AppTheme.grey20,
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.only(
+                                        top: 20,
+                                        left: 15,
+                                        right: 15,
+                                      ),
+                                      child: Text(
+                                        snapshot.data.tape[index].message,
+                                        style: Styles.regularContent(
+                                          AppTheme.dark80,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      width:
+                                      MediaQuery.of(context).size.width - 80,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(10),
+                                        ),
+                                        child: Image.asset(
+                                          snapshot.data.tape[index].image,
+                                          width:
+                                          MediaQuery.of(context).size.width -
+                                              80,
+                                          fit: BoxFit.fitWidth,
+                                        ),
+                                      ),
+                                      margin: EdgeInsets.only(
+                                        left: 15,
+                                        top: 20,
+                                      ),
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.only(
+                                        left: 15,
+                                        right: 15,
+                                        top: 20,
+                                        bottom: 20,
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          GestureDetector(
+                                            child: snapshot
+                                                .data.tape[index].isFavourite
+                                                ? SvgPicture.asset(
+                                              "assets/icon/favourite_active.svg",
+                                            )
+                                                : SvgPicture.asset(
+                                              "assets/icon/favourite.svg",
+                                            ),
+                                            onTap: () {
+                                              homeBloc.fetchUpdateFav(
+                                                index,
+                                                !snapshot
+                                                    .data.tape[index].isFavourite,
+                                              );
+                                            },
+                                          ),
+                                          SizedBox(width: 10),
+                                          Text(
+                                            countFormat.format(
+                                              snapshot.data.tape[index].count,
+                                            ),
+                                            style: Styles.semiBoldContent(
+                                              AppTheme.dark80,
+                                            ),
+                                          ),
+                                          SizedBox(width: 23),
+                                          GestureDetector(
+                                            onTap: () {},
+                                            child: SvgPicture.asset(
+                                              "assets/icon/message-circle.svg",
+                                            ),
+                                          ),
+                                          SizedBox(width: 10),
+                                          Text(
+                                            countFormat.format(
+                                              snapshot.data.tape[index].comments
+                                                  .length,
+                                            ),
+                                            style: Styles.semiBoldContent(
+                                              AppTheme.dark80,
+                                            ),
+                                          ),
+                                          Expanded(child: Container()),
+                                          Text(
+                                            snapshot.data.tape[index].time,
+                                            style: Styles.regularBody(
+                                              AppTheme.grey,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
                         )
                       ],
                     );

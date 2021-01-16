@@ -8,6 +8,10 @@ import 'package:messenger/src/ui/menu/explore/explore_screen.dart';
 import 'package:messenger/src/ui/menu/home/home_screen.dart';
 import 'package:messenger/src/ui/menu/profile/profile_screen.dart';
 
+import 'package:intl/intl.dart';
+
+final countFormat = new NumberFormat("#,##0", "ru");
+
 class MainScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
