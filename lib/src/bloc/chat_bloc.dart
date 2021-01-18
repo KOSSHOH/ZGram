@@ -20,6 +20,11 @@ class ChatBloc {
     });
   }
 
+  fetchDeleteItem(int index) {
+    chat.removeAt(index);
+    _chatFetcher.sink.add(chat);
+  }
+
   dispose() {
     _chatFetcher.close();
   }

@@ -94,6 +94,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             ),
             child: Theme(
               data: ThemeData(
+                accentColor: Color(0xFF327FEB),
+                canvasColor: Colors.transparent,
+                textTheme: AppTheme.textTheme,
                 platform: Platform.isAndroid
                     ? TargetPlatform.android
                     : TargetPlatform.iOS,

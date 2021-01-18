@@ -64,6 +64,9 @@ class _ExploreScreenState extends State<ExploreScreen>
           Expanded(
             child: Theme(
               data: ThemeData(
+                accentColor: Color(0xFF327FEB),
+                canvasColor: Colors.transparent,
+                textTheme: AppTheme.textTheme,
                 platform: TargetPlatform.iOS,
               ),
               child: StreamBuilder(

@@ -65,6 +65,9 @@ class _HomeScreenState extends State<HomeScreen>
           Expanded(
             child: Theme(
               data: ThemeData(
+                accentColor: Color(0xFF327FEB),
+                canvasColor: Colors.transparent,
+                textTheme: AppTheme.textTheme,
                 platform: TargetPlatform.iOS,
               ),
               child: StreamBuilder(

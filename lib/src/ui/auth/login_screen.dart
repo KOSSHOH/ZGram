@@ -74,6 +74,9 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             child: Theme(
               data: ThemeData(
+                accentColor: Color(0xFF327FEB),
+                canvasColor: Colors.transparent,
+                textTheme: AppTheme.textTheme,
                 platform: Platform.isAndroid
                     ? TargetPlatform.android
                     : TargetPlatform.iOS,
@@ -128,6 +131,9 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             child: Theme(
               data: ThemeData(
+                accentColor: Color(0xFF327FEB),
+                canvasColor: Colors.transparent,
+                textTheme: AppTheme.textTheme,
                 platform: Platform.isAndroid
                     ? TargetPlatform.android
                     : TargetPlatform.iOS,

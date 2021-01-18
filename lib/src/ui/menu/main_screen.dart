@@ -47,6 +47,9 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
       backgroundColor: AppTheme.white,
       body: Theme(
         data: ThemeData(
+          accentColor: Color(0xFF327FEB),
+          canvasColor: Colors.transparent,
+          textTheme: AppTheme.textTheme,
           platform: TargetPlatform.android,
         ),
         child: PageView(
