@@ -6,6 +6,7 @@ import 'package:messenger/src/app_theme.dart';
 import 'package:messenger/src/bloc/chat_bloc.dart';
 import 'package:messenger/src/dialog/bottom_dialog.dart';
 import 'package:messenger/src/model/chat_model.dart';
+import 'package:messenger/src/ui/menu/chat/chat_item_screen.dart';
 import 'package:messenger/src/utils/styles.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -93,7 +94,15 @@ class _ChatScreenState extends State<ChatScreen>
                           actionPane: SlidableBehindActionPane(),
                           actionExtentRatio: 0.25,
                           child: GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      ChatItemScreen(snapshot.data[index]),
+                                ),
+                              );
+                            },
                             child: Container(
                               margin: EdgeInsets.only(
                                 bottom: 40,
@@ -101,7 +110,7 @@ class _ChatScreenState extends State<ChatScreen>
                               padding: EdgeInsets.only(
                                 left: 25,
                                 right: 39,
-                              ),
+                              ),color: AppTheme.screen,
                               child: Row(
                                 children: [
                                   Container(

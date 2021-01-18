@@ -12,7 +12,7 @@ class AppTheme {
   static const Color primary = Color(0xFF327FEB);
   static const Color dark = Color(0xFF383838);
   static const Color dark80 = Color.fromRGBO(56, 56, 56, 0.8);
-  static const Color dark30 = Color.fromRGBO(56, 56, 56, 0.6);
+  static const Color dark60 = Color.fromRGBO(56, 56, 56, 0.6);
   static const Color dark10 = Color.fromRGBO(56, 56, 56, 0.4);
   static const Color grey = Color(0xFFA9A9A9);
   static const Color grey80 = Color.fromRGBO(169, 169, 169, 0.8);
