@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:messenger/src/app_theme.dart';
 import 'package:messenger/src/bloc/home_bloc.dart';
 import 'package:messenger/src/model/home/home_model.dart';
+import 'package:messenger/src/ui/menu/home/notification_screen.dart';
 import 'package:messenger/src/ui/menu/main_screen.dart';
 import 'package:messenger/src/ui/profile/profile_friend_screen.dart';
 import 'package:messenger/src/utils/styles.dart';
@@ -53,7 +54,14 @@ class _HomeScreenState extends State<HomeScreen>
                       ),
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => NotificationScreen(),
+                          ),
+                        );
+                      },
                       child: SvgPicture.asset(
                         "assets/icon/inactive.svg",
                       ),
@@ -228,8 +236,8 @@ class _HomeScreenState extends State<HomeScreen>
                                                 MaterialPageRoute(
                                                   builder: (context) =>
                                                       FriendProfileScreen(
-                                                        snapshot.data.tape[index]
-                                                      ),
+                                                          snapshot.data
+                                                              .tape[index]),
                                                 ),
                                               );
                                             },
@@ -244,8 +252,8 @@ class _HomeScreenState extends State<HomeScreen>
                                                   Radius.circular(42),
                                                 ),
                                                 child: Image.asset(
-                                                  snapshot
-                                                      .data.tape[index].userImage,
+                                                  snapshot.data.tape[index]
+                                                      .userImage,
                                                   height: 42,
                                                   width: 42,
                                                   fit: BoxFit.cover,
@@ -260,7 +268,9 @@ class _HomeScreenState extends State<HomeScreen>
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
-                                                        FriendProfileScreen( snapshot.data.tape[index]),
+                                                        FriendProfileScreen(
+                                                            snapshot.data
+                                                                .tape[index]),
                                                   ),
                                                 );
                                               },
