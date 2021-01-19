@@ -6,6 +6,7 @@ import 'package:messenger/src/app_theme.dart';
 import 'package:messenger/src/bloc/home_bloc.dart';
 import 'package:messenger/src/model/home/home_model.dart';
 import 'package:messenger/src/ui/menu/main_screen.dart';
+import 'package:messenger/src/ui/profile/profile_friend_screen.dart';
 import 'package:messenger/src/utils/styles.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -191,11 +192,10 @@ class _HomeScreenState extends State<HomeScreen>
                           ),
                           itemBuilder: (BuildContext ctxt, int index) {
                             return GestureDetector(
-                              onDoubleTap: (){
+                              onDoubleTap: () {
                                 homeBloc.fetchUpdateFav(
                                   index,
-                                  !snapshot
-                                      .data.tape[index].isFavourite,
+                                  !snapshot.data.tape[index].isFavourite,
                                 );
                               },
                               child: Container(
@@ -217,34 +217,59 @@ class _HomeScreenState extends State<HomeScreen>
                                     Container(
                                       child: Row(
                                         crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                            CrossAxisAlignment.center,
                                         mainAxisAlignment:
-                                        MainAxisAlignment.center,
+                                            MainAxisAlignment.center,
                                         children: [
-                                          Container(
-                                            height: 42,
-                                            width: 42,
-                                            margin: EdgeInsets.only(
-                                              right: 19.0,
-                                            ),
-                                            child: ClipRRect(
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(42),
+                                          GestureDetector(
+                                            onTap: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      FriendProfileScreen(
+                                                        snapshot.data.tape[index]
+                                                      ),
+                                                ),
+                                              );
+                                            },
+                                            child: Container(
+                                              height: 42,
+                                              width: 42,
+                                              margin: EdgeInsets.only(
+                                                right: 19.0,
                                               ),
-                                              child: Image.asset(
-                                                snapshot
-                                                    .data.tape[index].userImage,
-                                                height: 42,
-                                                width: 42,
-                                                fit: BoxFit.cover,
+                                              child: ClipRRect(
+                                                borderRadius: BorderRadius.all(
+                                                  Radius.circular(42),
+                                                ),
+                                                child: Image.asset(
+                                                  snapshot
+                                                      .data.tape[index].userImage,
+                                                  height: 42,
+                                                  width: 42,
+                                                  fit: BoxFit.cover,
+                                                ),
                                               ),
                                             ),
                                           ),
                                           Expanded(
-                                            child: Text(
-                                              snapshot.data.tape[index].userName,
-                                              style: Styles.boldDisplay(
-                                                AppTheme.dark,
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        FriendProfileScreen( snapshot.data.tape[index]),
+                                                  ),
+                                                );
+                                              },
+                                              child: Text(
+                                                snapshot
+                                                    .data.tape[index].userName,
+                                                style: Styles.boldDisplay(
+                                                  AppTheme.dark,
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -285,16 +310,17 @@ class _HomeScreenState extends State<HomeScreen>
                                       ),
                                     ),
                                     Container(
-                                      width:
-                                      MediaQuery.of(context).size.width - 80,
+                                      width: MediaQuery.of(context).size.width -
+                                          80,
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.all(
                                           Radius.circular(10),
                                         ),
                                         child: Image.asset(
                                           snapshot.data.tape[index].image,
-                                          width:
-                                          MediaQuery.of(context).size.width -
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
                                               80,
                                           fit: BoxFit.fitWidth,
                                         ),
@@ -314,19 +340,19 @@ class _HomeScreenState extends State<HomeScreen>
                                       child: Row(
                                         children: [
                                           GestureDetector(
-                                            child: snapshot
-                                                .data.tape[index].isFavourite
+                                            child: snapshot.data.tape[index]
+                                                    .isFavourite
                                                 ? SvgPicture.asset(
-                                              "assets/icon/favourite_active.svg",
-                                            )
+                                                    "assets/icon/favourite_active.svg",
+                                                  )
                                                 : SvgPicture.asset(
-                                              "assets/icon/favourite.svg",
-                                            ),
+                                                    "assets/icon/favourite.svg",
+                                                  ),
                                             onTap: () {
                                               homeBloc.fetchUpdateFav(
                                                 index,
-                                                !snapshot
-                                                    .data.tape[index].isFavourite,
+                                                !snapshot.data.tape[index]
+                                                    .isFavourite,
                                               );
                                             },
                                           ),

@@ -98,8 +98,10 @@ class _ChatScreenState extends State<ChatScreen>
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) =>
-                                      ChatItemScreen(snapshot.data[index]),
+                                  builder: (context) => ChatItemScreen(
+                                    image: snapshot.data[index].image,
+                                    name: snapshot.data[index].name,
+                                  ),
                                 ),
                               );
                             },
@@ -110,7 +112,8 @@ class _ChatScreenState extends State<ChatScreen>
                               padding: EdgeInsets.only(
                                 left: 25,
                                 right: 39,
-                              ),color: AppTheme.screen,
+                              ),
+                              color: AppTheme.screen,
                               child: Row(
                                 children: [
                                   Container(

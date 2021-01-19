@@ -10,9 +10,13 @@ import 'package:messenger/src/model/chat_model.dart';
 import 'package:messenger/src/utils/styles.dart';
 
 class ChatItemScreen extends StatefulWidget {
-  final ChatModel chatModel;
+  final String image;
+  final String name;
 
-  ChatItemScreen(this.chatModel);
+  ChatItemScreen({
+    this.image,
+    this.name,
+  });
 
   @override
   State<StatefulWidget> createState() {
@@ -80,7 +84,7 @@ class _ChatItemScreenState extends State<ChatItemScreen> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(52.0),
                         child: Image.asset(
-                          widget.chatModel.image,
+                          widget.image,
                           height: 52,
                           width: 52,
                           fit: BoxFit.cover,
@@ -93,7 +97,7 @@ class _ChatItemScreenState extends State<ChatItemScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            widget.chatModel.name,
+                            widget.name,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: Styles.boldLabel(AppTheme.dark),
@@ -101,7 +105,7 @@ class _ChatItemScreenState extends State<ChatItemScreen> {
                           SizedBox(height: 2),
                           Text(
                             "@" +
-                                widget.chatModel.name
+                                widget.name
                                     .toLowerCase()
                                     .replaceAll(" ", ""),
                             maxLines: 1,
