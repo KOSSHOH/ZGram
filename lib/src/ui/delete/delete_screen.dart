@@ -1,7 +1,10 @@
+import 'dart:convert';
+import 'dart:io';
+import 'dart:io' as Io;
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:messenger/src/app_theme.dart';
-import 'package:messenger/src/utils/styles.dart';
-import 'package:pinput/pin_put/pin_put.dart';
 
 class DeleteScreen extends StatefulWidget {
   @override
@@ -9,50 +12,42 @@ class DeleteScreen extends StatefulWidget {
 }
 
 class DeleteScreenState extends State<DeleteScreen> {
-  final TextEditingController _pinPutController = TextEditingController();
-  final FocusNode _pinPutFocusNode = FocusNode();
+  String image;
 
-  BoxDecoration get _pinPutDecoration {
-    return BoxDecoration(
-      borderRadius: BorderRadius.circular(10.0),
-      border: Border.all(
-        color: AppTheme.grey60,
-      ),
+  chooseImage() {
+    ImagePicker.pickImage(source: ImageSource.gallery).then((value) => {
+          setState(() {
+            image = value.path;
+          }),
+        });
+  }
+
+  Widget showImageTwo(String image) {
+    var file = Io.File(image);
+    return Image.file(
+      file,
+      fit: BoxFit.fill,
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Container(
-            color: Colors.white,
-            margin: const EdgeInsets.only(
-              left: 41,
-              right: 41,
+      backgroundColor: AppTheme.white,
+      body: Container(
+        padding: EdgeInsets.all(30.0),
+        child: ListView(
+          children: <Widget>[
+            OutlineButton(
+              onPressed: chooseImage,
+              child: Text('Choose Image'),
             ),
-            // padding: const EdgeInsets.all(20.0),
-            child: PinPut(
-              fieldsCount: 4,
-              onSubmit: (String pin) => {
-                print(pin),
-              },
-              focusNode: _pinPutFocusNode,
-              controller: _pinPutController,
-              submittedFieldDecoration: _pinPutDecoration,
-              selectedFieldDecoration: _pinPutDecoration,
-              followingFieldDecoration: _pinPutDecoration,
-              textStyle: Styles.boldH2(AppTheme.dark),
-              eachFieldConstraints: BoxConstraints(
-                minHeight: 61.0,
-                minWidth: 50.0,
-              ),
+            SizedBox(
+              height: 20.0,
             ),
-          ),
-        ],
+            image != null ? showImageTwo(image) : Container(),
+          ],
+        ),
       ),
     );
   }

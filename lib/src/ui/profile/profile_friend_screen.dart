@@ -25,7 +25,7 @@ class _FriendProfileScreenState extends State<FriendProfileScreen> {
 
   @override
   void initState() {
-    profileBloc.fetchAllProfile();
+    profileBloc.fetchAllProfileFried();
     super.initState();
   }
 
@@ -83,7 +83,7 @@ class _FriendProfileScreenState extends State<FriendProfileScreen> {
                 platform: TargetPlatform.iOS,
               ),
               child: StreamBuilder(
-                stream: profileBloc.allProfile,
+                stream: profileBloc.allProfileFriend,
                 builder: (context, AsyncSnapshot<List<ExploreModel>> snapshot) {
                   if (snapshot.hasData) {
                     return ListView(

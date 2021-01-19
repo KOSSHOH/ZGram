@@ -4,8 +4,9 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:messenger/src/app_theme.dart';
 import 'package:messenger/src/bloc/profile_bloc.dart';
-import 'package:messenger/src/model/explore_model.dart';
 import 'package:messenger/src/utils/styles.dart';
+
+import 'dart:io' as Io;
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -71,7 +72,7 @@ class _ProfileScreenState extends State<ProfileScreen>
               ),
               child: StreamBuilder(
                 stream: profileBloc.allProfile,
-                builder: (context, AsyncSnapshot<List<ExploreModel>> snapshot) {
+                builder: (context, AsyncSnapshot<List<String>> snapshot) {
                   if (snapshot.hasData) {
                     return ListView(
                       padding: EdgeInsets.only(
@@ -234,12 +235,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                           crossAxisCount: 4,
                           itemCount: snapshot.data.length,
                           itemBuilder: (BuildContext context, int index) {
-                            return Container(
-                              child: Image.asset(
-                                snapshot.data[index].image,
-                                fit: BoxFit.fitWidth,
-                              ),
-                            );
+                            return showImage(snapshot.data[index]);
                           },
                           staggeredTileBuilder: (int index) =>
                               new StaggeredTile.fit(2),
@@ -257,6 +253,17 @@ class _ProfileScreenState extends State<ProfileScreen>
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget showImage(String image) {
+    var file = Io.File(image);
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(10.0),
+      child: Image.file(
+        file,
+        fit: BoxFit.fitWidth,
       ),
     );
   }

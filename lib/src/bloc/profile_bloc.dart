@@ -9,17 +9,29 @@ import 'package:messenger/src/utils/repository.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ProfileBloc {
-  final _profileFetcher = PublishSubject<List<ExploreModel>>();
+  final _repository = Repository();
 
-  Observable<List<ExploreModel>> get allProfile => _profileFetcher.stream;
+  final _friendProfileFetcher = PublishSubject<List<ExploreModel>>();
+  final _profileFetcher = PublishSubject<List<String>>();
 
-  fetchAllProfile() async {
+  Observable<List<ExploreModel>> get allProfileFriend =>
+      _friendProfileFetcher.stream;
+
+  Observable<List<String>> get allProfile => _profileFetcher.stream;
+
+  fetchAllProfileFried() async {
     Timer(Duration(seconds: 1), () {
-      _profileFetcher.sink.add(explore);
+      _friendProfileFetcher.sink.add(explore);
     });
   }
 
+  fetchAllProfile() async {
+    List<String> images = await _repository.databaseImages();
+    _profileFetcher.sink.add(images);
+  }
+
   dispose() {
+    _friendProfileFetcher.close();
     _profileFetcher.close();
   }
 

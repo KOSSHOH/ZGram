@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:messenger/src/app_theme.dart';
+import 'package:messenger/src/bloc/profile_bloc.dart';
+import 'package:messenger/src/database/database_helper_images.dart';
 import 'package:messenger/src/ui/auth/login_screen.dart';
 import 'package:messenger/src/ui/auth/signup_screen.dart';
 import 'package:messenger/src/ui/menu/chat/chat_screen.dart';
@@ -40,6 +43,8 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
       _pageController.jumpToPage(index);
     });
   }
+
+  DatabaseHelperImages databaseHelperImages = new DatabaseHelperImages();
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +99,12 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          ImagePicker.pickImage(source: ImageSource.gallery).then((value) => {
+                databaseHelperImages.saveProducts(value.path),
+                profileBloc.fetchAllProfile(),
+              });
+        },
         child: Icon(
           Icons.add,
           size: 28,
