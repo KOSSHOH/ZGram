@@ -1,5 +1,3 @@
-import 'dart:convert';
-import 'dart:io';
 import 'dart:io' as Io;
 
 import 'package:flutter/material.dart';
@@ -15,6 +13,7 @@ class DeleteScreenState extends State<DeleteScreen> {
   String image;
 
   chooseImage() {
+    // ignore: deprecated_member_use
     ImagePicker.pickImage(source: ImageSource.gallery).then((value) => {
           setState(() {
             image = value.path;

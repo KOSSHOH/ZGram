@@ -4,7 +4,6 @@ import 'package:messenger/src/app_theme.dart';
 import 'package:messenger/src/bloc/chat_bloc.dart';
 import 'package:messenger/src/model/bus/loading_model.dart';
 import 'package:messenger/src/utils/styles.dart';
-import 'package:messenger/src/utils/utils.dart';
 import 'package:rxbus/rxbus.dart';
 
 class BottomDialog {

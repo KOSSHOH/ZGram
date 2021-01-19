@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +6,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:messenger/src/app_theme.dart';
 import 'package:messenger/src/ui/auth/reset_passwors_screen.dart';
 import 'package:messenger/src/utils/styles.dart';
-import 'package:messenger/src/utils/utils.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 
 class CodeVerifyScreen extends StatefulWidget {

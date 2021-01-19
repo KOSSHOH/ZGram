@@ -4,6 +4,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:messenger/src/app_theme.dart';
 import 'package:messenger/src/bloc/profile_bloc.dart';
+import 'package:messenger/src/ui/menu/profile/setting_screen.dart';
 import 'package:messenger/src/utils/styles.dart';
 
 import 'dart:io' as Io;
@@ -27,6 +28,7 @@ class _ProfileScreenState extends State<ProfileScreen>
   }
 
   @override
+  // ignore: must_call_super
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppTheme.screen,
@@ -52,7 +54,14 @@ class _ProfileScreenState extends State<ProfileScreen>
                       ),
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SettingScreen(),
+                          ),
+                        );
+                      },
                       child: SvgPicture.asset(
                         "assets/icon/settings.svg",
                       ),

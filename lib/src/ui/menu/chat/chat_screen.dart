@@ -28,6 +28,7 @@ class _ChatScreenState extends State<ChatScreen>
   }
 
   @override
+  // ignore: must_call_super
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppTheme.screen,

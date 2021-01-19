@@ -2,13 +2,6 @@ import 'dart:async';
 
 import 'package:messenger/src/model/chat_item_model.dart';
 import 'package:messenger/src/model/chat_model.dart';
-import 'package:messenger/src/model/explore_model.dart';
-import 'package:messenger/src/model/home/comment_model.dart';
-import 'package:messenger/src/model/home/home_model.dart';
-import 'package:messenger/src/model/home/story_model.dart';
-import 'package:messenger/src/model/home/tape_model.dart';
-import 'package:messenger/src/ui/menu/chat/chat_item_screen.dart';
-import 'package:messenger/src/utils/repository.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ChatBloc {

@@ -4,8 +4,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:messenger/src/app_theme.dart';
 import 'package:messenger/src/bloc/profile_bloc.dart';
 import 'package:messenger/src/database/database_helper_images.dart';
-import 'package:messenger/src/ui/auth/login_screen.dart';
-import 'package:messenger/src/ui/auth/signup_screen.dart';
 import 'package:messenger/src/ui/menu/chat/chat_screen.dart';
 import 'package:messenger/src/ui/menu/explore/explore_screen.dart';
 import 'package:messenger/src/ui/menu/home/home_screen.dart';
@@ -100,6 +98,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          // ignore: deprecated_member_use
           ImagePicker.pickImage(source: ImageSource.gallery).then((value) => {
                 databaseHelperImages.saveProducts(value.path),
                 profileBloc.fetchAllProfile(),

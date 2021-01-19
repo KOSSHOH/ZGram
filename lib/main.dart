@@ -3,10 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:messenger/src/app_theme.dart';
-import 'package:messenger/src/ui/delete/delete_screen.dart';
 import 'package:messenger/src/ui/menu/main_screen.dart';
-import 'package:messenger/src/ui/onboarding.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations(

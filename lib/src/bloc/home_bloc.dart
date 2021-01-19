@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:messenger/src/model/home/comment_model.dart';
 import 'package:messenger/src/model/home/home_model.dart';
 import 'package:messenger/src/model/home/story_model.dart';
 import 'package:messenger/src/model/home/tape_model.dart';
