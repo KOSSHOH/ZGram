@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:messenger/src/app_theme.dart';
 import 'package:messenger/src/bloc/chat_bloc.dart';
+import 'package:messenger/src/bloc/home_bloc.dart';
+import 'package:messenger/src/database/database_helper_comment.dart';
 import 'package:messenger/src/model/bus/loading_model.dart';
+import 'package:messenger/src/model/home/comment_model.dart';
 import 'package:messenger/src/utils/styles.dart';
+import 'package:messenger/src/utils/utils.dart';
 import 'package:rxbus/rxbus.dart';
 
 class BottomDialog {
@@ -117,7 +121,7 @@ class BottomDialog {
     );
   }
 
-  static void deleteChat(BuildContext context,int index) {
+  static void deleteChat(BuildContext context, int index) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -323,6 +327,226 @@ class BottomDialog {
                     ),
                   ),
                 ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  static void sendComment(BuildContext context, int tapeId) {
+    TextEditingController chatController = TextEditingController();
+    final FocusNode focusNode = FocusNode();
+    bool isSend = false;
+
+    DatabaseHelperComment dataBase = new DatabaseHelperComment();
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (BuildContext context, setState) {
+            chatController.addListener(() {
+              if (chatController.text.length > 0) {
+                setState(() {
+                  isSend = true;
+                });
+              } else {
+                setState(() {
+                  isSend = false;
+                });
+              }
+            });
+
+            return Padding(
+              padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom,
+              ),
+              child: Container(
+                height: 537,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10),
+                    ),
+                    color: AppTheme.white,
+                  ),
+                  child: Column(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(
+                          top: 15,
+                          bottom: 15,
+                        ),
+                        height: 5,
+                        width: 114,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                            3,
+                          ),
+                          color: AppTheme.grey20,
+                        ),
+                      ),
+                      Expanded(
+                        child: FutureBuilder<List<CommentModel>>(
+                          future: dataBase.getProductsTapeId(tapeId),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              return ListView(
+                                padding: EdgeInsets.only(
+                                  left: 25,
+                                  right: 25,
+                                  top: 15,
+                                ),
+                                children: [
+                                  Text(
+                                    "Comments",
+                                    style: Styles.boldH3(
+                                      AppTheme.dark,
+                                    ),
+                                  ),
+                                  ListView.builder(
+                                    shrinkWrap: true,
+                                    physics: ClampingScrollPhysics(),
+                                    scrollDirection: Axis.vertical,
+                                    itemCount: snapshot.data.length,
+                                    itemBuilder: (context, index) {
+                                      return Container(
+                                        margin: EdgeInsets.only(
+                                          top: 25,
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            Container(
+                                              height: 38,
+                                              width: 38,
+                                              margin: EdgeInsets.only(
+                                                right: 15,
+                                              ),
+                                              child: ClipRRect(
+                                                borderRadius: BorderRadius.all(
+                                                  Radius.circular(38),
+                                                ),
+                                                child: Image.asset(
+                                                  "assets/images/thor.png",
+                                                  height: 38,
+                                                  width: 38,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Text.rich(
+                                                TextSpan(
+                                                  children: <InlineSpan>[
+                                                    TextSpan(
+                                                      text: snapshot.data[index]
+                                                              .userName +
+                                                          " ",
+                                                      style: Styles.boldContent(
+                                                        AppTheme.dark,
+                                                      ),
+                                                    ),
+                                                    TextSpan(
+                                                      text: snapshot.data[index]
+                                                              .comment +
+                                                          " ",
+                                                      style:
+                                                          Styles.regularContent(
+                                                        AppTheme.dark,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ],
+                              );
+                            }
+                            return Container(
+                              child: Center(
+                                child: Text("shimmer"),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      Container(
+                        color: AppTheme.white,
+                        padding: EdgeInsets.only(
+                          top: 20,
+                          left: 25,
+                          right: 25,
+                          bottom: 48,
+                        ),
+                        child: Container(
+                          padding: EdgeInsets.only(
+                            top: 13,
+                            bottom: 13,
+                            right: 20,
+                            left: 20,
+                          ),
+                          decoration: BoxDecoration(
+                            color: AppTheme.grey20,
+                            borderRadius: BorderRadius.circular(26),
+                          ),
+                          child: Row(
+                            children: [
+                              SvgPicture.asset("assets/icon/smile.svg"),
+                              SizedBox(width: 15),
+                              Expanded(
+                                child: TextField(
+                                  style: Styles.semiBoldContent(AppTheme.dark),
+                                  controller: chatController,
+                                  decoration: InputDecoration.collapsed(
+                                    hintText: "Type your messages ...",
+                                    hintStyle:
+                                        Styles.regularContent(AppTheme.dark60),
+                                  ),
+                                  focusNode: focusNode,
+                                ),
+                              ),
+                              SizedBox(width: 15),
+                              GestureDetector(
+                                onTap: () {
+                                  var now = new DateTime.now();
+
+                                  if (isSend) {
+                                    Utils.getName().then(
+                                      (value) => {
+                                        dataBase.saveProducts(CommentModel(
+                                          userName: value,
+                                          comment: chatController.text,
+                                          dateTime: now,
+                                          tapeId: tapeId,
+                                        )),
+                                        homeBloc.fetchUpdateComment(),
+                                        setState(() {
+                                          chatController.text = "";
+                                        }),
+                                      },
+                                    );
+                                  }
+                                },
+                                child: !isSend
+                                    ? SvgPicture.asset(
+                                        "assets/icon/not_send.svg")
+                                    : SvgPicture.asset("assets/icon/send.svg"),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             );
           },

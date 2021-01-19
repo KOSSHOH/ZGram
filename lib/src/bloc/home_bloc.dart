@@ -25,6 +25,16 @@ class HomeBloc {
     });
   }
 
+  fetchUpdateComment() async {
+    for (int i = 0; i < tape.length; i++) {
+      tape[i].comments = await _repository.databaseItemTape(tape[i].id);
+    }
+    _homeFetcher.sink.add(HomeModel(
+      story: story,
+      tape: tape,
+    ));
+  }
+
   fetchUpdateFav(int index, bool fav) async {
     for (int i = 0; i < tape.length; i++) {
       tape[i].comments = await _repository.databaseItemTape(tape[i].id);

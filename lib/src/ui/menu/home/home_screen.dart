@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:messenger/src/app_theme.dart';
 import 'package:messenger/src/bloc/home_bloc.dart';
+import 'package:messenger/src/dialog/bottom_dialog.dart';
 import 'package:messenger/src/model/home/home_model.dart';
 import 'package:messenger/src/ui/menu/home/notification_screen.dart';
 import 'package:messenger/src/ui/menu/main_screen.dart';
@@ -237,8 +238,8 @@ class _HomeScreenState extends State<HomeScreen>
                                                 MaterialPageRoute(
                                                   builder: (context) =>
                                                       FriendProfileScreen(
-                                                          snapshot.data
-                                                              .tape[index]),
+                                                    snapshot.data.tape[index],
+                                                  ),
                                                 ),
                                               );
                                             },
@@ -378,7 +379,12 @@ class _HomeScreenState extends State<HomeScreen>
                                           ),
                                           SizedBox(width: 23),
                                           GestureDetector(
-                                            onTap: () {},
+                                            onTap: () {
+                                              BottomDialog.sendComment(
+                                                context,
+                                                snapshot.data.tape[index].id,
+                                              );
+                                            },
                                             child: SvgPicture.asset(
                                               "assets/icon/message-circle.svg",
                                             ),

@@ -5,7 +5,8 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelperComment {
-  static final DatabaseHelperComment _instance = new DatabaseHelperComment.internal();
+  static final DatabaseHelperComment _instance =
+      new DatabaseHelperComment.internal();
 
   factory DatabaseHelperComment() => _instance;
 
@@ -69,13 +70,7 @@ class DatabaseHelperComment {
     List<Map> list = await dbClient.rawQuery('SELECT * FROM $tableNote');
     List<CommentModel> item = new List();
     for (int i = 0; i < list.length; i++) {
-      var items = new CommentModel(
-        id: list[i][columnId],
-        userName: list[i][columnUserName],
-        comment: list[i][columnComment],
-        dateTime: list[i][columnDateTime],
-        tapeId: list[i][columnTapeId],
-      );
+      var items = CommentModel.fromMap(list[i]);
       item.add(items);
     }
     return item;
@@ -87,13 +82,7 @@ class DatabaseHelperComment {
     List<CommentModel> item = new List();
     for (int i = 0; i < list.length; i++) {
       if (id == list[i][columnTapeId]) {
-        var items = new CommentModel(
-          id: list[i][columnId],
-          userName: list[i][columnUserName],
-          comment: list[i][columnComment],
-          dateTime: list[i][columnDateTime],
-          tapeId: list[i][columnTapeId],
-        );
+        var items = CommentModel.fromMap(list[i]);
         item.add(items);
       }
     }

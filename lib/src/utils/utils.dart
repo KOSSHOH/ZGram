@@ -26,6 +26,15 @@ class Utils {
     }
   }
 
+  static Future<String> getName() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.getString("name") != null) {
+      return prefs.getString("name");
+    } else {
+      return "Shahboz Turonov";
+    }
+  }
+
   static Future<bool> isMail(String mail) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (prefs.getString("mail") != null) {
