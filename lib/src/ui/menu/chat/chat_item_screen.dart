@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -5,6 +7,7 @@ import 'package:messenger/src/app_theme.dart';
 import 'package:messenger/src/bloc/chat_bloc.dart';
 import 'package:messenger/src/model/chat_item_model.dart';
 import 'package:messenger/src/utils/styles.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ChatItemScreen extends StatefulWidget {
   final String image;
@@ -101,10 +104,7 @@ class _ChatItemScreenState extends State<ChatItemScreen> {
                           ),
                           SizedBox(height: 2),
                           Text(
-                            "@" +
-                                widget.name
-                                    .toLowerCase()
-                                    .replaceAll(" ", ""),
+                            "@" + widget.name.toLowerCase().replaceAll(" ", ""),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: Styles.semiBoldContent(
@@ -205,7 +205,61 @@ class _ChatItemScreenState extends State<ChatItemScreen> {
                     },
                   );
                 }
-                return Container();
+                return Shimmer.fromColors(
+                  baseColor: AppTheme.shimmerBase,
+                  highlightColor: AppTheme.shimmerHighlight,
+                  child: ListView.builder(
+                    padding: EdgeInsets.only(
+                      left: 25,
+                      right: 25,
+                    ),
+                    itemCount: 25,
+                    reverse: true,
+                    itemBuilder: (context, index) {
+                      Random random = new Random();
+                      int randomNumber = random.nextInt(25)+50;
+                      return Align(
+                        alignment: randomNumber % 2 == 0
+                            ? Alignment.centerRight
+                            : Alignment.centerLeft,
+                        child: Container(
+                          height: randomNumber.toDouble(),
+                          margin: randomNumber % 2 == 0
+                              ? EdgeInsets.only(
+                                  left: 35,
+                                  top: 30,
+                                )
+                              : EdgeInsets.only(
+                                  right: 35,
+                                  top: 30,
+                                ),
+                          padding: EdgeInsets.only(
+                            top: 7.0,
+                            bottom: 7.0,
+                            left: 15,
+                            right: 15,
+                          ),
+                          decoration: BoxDecoration(
+                            color: randomNumber % 2 == 0
+                                ? AppTheme.white
+                                : AppTheme.white,
+                            borderRadius: randomNumber % 2 == 0
+                                ? BorderRadius.only(
+                                    topLeft: Radius.circular(10.0),
+                                    topRight: Radius.circular(10.0),
+                                    bottomLeft: Radius.circular(10.0),
+                                  )
+                                : BorderRadius.only(
+                                    topLeft: Radius.circular(10.0),
+                                    topRight: Radius.circular(10.0),
+                                    bottomRight: Radius.circular(10.0),
+                                  ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                );
               },
             ),
           ),
