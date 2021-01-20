@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -6,6 +8,7 @@ import 'package:messenger/src/app_theme.dart';
 import 'package:messenger/src/bloc/explore_bloc.dart';
 import 'package:messenger/src/model/explore_model.dart';
 import 'package:messenger/src/utils/styles.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ExploreScreen extends StatefulWidget {
   @override
@@ -85,16 +88,46 @@ class _ExploreScreenState extends State<ExploreScreen>
                       itemCount: snapshot.data.length,
                       itemBuilder: (BuildContext context, int index) {
                         return Container(
-                          child: Image.asset(snapshot.data[index].image,fit: BoxFit.fitWidth,),
+                          child: Image.asset(
+                            snapshot.data[index].image,
+                            fit: BoxFit.fitWidth,
+                          ),
                         );
                       },
                       staggeredTileBuilder: (int index) =>
-                      new StaggeredTile.fit(2),
+                          new StaggeredTile.fit(2),
                       mainAxisSpacing: 25.0,
                       crossAxisSpacing: 25.0,
                     );
                   }
-                  return Container();
+                  return Shimmer.fromColors(
+                    baseColor: AppTheme.shimmerBase,
+                    highlightColor: AppTheme.shimmerHighlight,
+                    child: StaggeredGridView.countBuilder(
+                      padding: EdgeInsets.only(
+                        left: 25,
+                        right: 25,
+                        top: 25,
+                        bottom: 40,
+                      ),
+                      crossAxisCount: 4,
+                      itemCount: 25,
+                      itemBuilder: (BuildContext context, int index) {
+                        Random random = new Random();
+                        return Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: AppTheme.white,
+                          ),
+                          height: (random.nextInt(70) + 150).toDouble(),
+                        );
+                      },
+                      staggeredTileBuilder: (int index) =>
+                          new StaggeredTile.fit(2),
+                      mainAxisSpacing: 25.0,
+                      crossAxisSpacing: 25.0,
+                    ),
+                  );
                 },
               ),
             ),
