@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -8,6 +10,8 @@ import 'package:messenger/src/ui/menu/profile/setting_screen.dart';
 import 'package:messenger/src/utils/styles.dart';
 
 import 'dart:io' as Io;
+
+import 'package:shimmer/shimmer.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -256,7 +260,122 @@ class _ProfileScreenState extends State<ProfileScreen>
                       ],
                     );
                   }
-                  return Container();
+                  return Shimmer.fromColors(
+                    baseColor: AppTheme.shimmerBase,
+                    highlightColor: AppTheme.shimmerHighlight,
+                    child: ListView(
+                      padding: EdgeInsets.only(
+                        top: 0,
+                        left: 25,
+                        right: 25,
+                      ),
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(
+                            top: 35,
+                          ),
+                          height: 86,
+                          child: Row(
+                            children: [
+                              Container(
+                                height: 86,
+                                width: 86,
+                                decoration: BoxDecoration(
+                                  color: AppTheme.white,
+                                  borderRadius: BorderRadius.circular(52.0),
+                                ),
+                              ),
+                              SizedBox(width: 25),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      height: 25,
+                                      decoration: BoxDecoration(
+                                          color: AppTheme.white,
+                                          borderRadius:
+                                              BorderRadius.circular(9)),
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.only(
+                                        top: 12,
+                                        right: 75,
+                                      ),
+                                      height: 18,
+                                      decoration: BoxDecoration(
+                                        color: AppTheme.white,
+                                        borderRadius: BorderRadius.circular(9),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(
+                            top: 25,
+                          ),
+                          child: Row(
+                            children: [
+                              Container(
+                                height: 56,
+                                width: 92,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(28.5),
+                                  color: AppTheme.screen,
+                                  border: Border.all(
+                                    color: AppTheme.primary,
+                                    width: 2,
+                                  ),
+                                ),
+                                margin: EdgeInsets.only(
+                                  right: 25,
+                                ),
+                              ),
+                              Expanded(
+                                child: Container(
+                                  height: 56,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(28.5),
+                                    color: AppTheme.white,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        StaggeredGridView.countBuilder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          padding: EdgeInsets.only(
+                            top: 25,
+                            bottom: 40,
+                          ),
+                          crossAxisCount: 4,
+                          itemCount: 25,
+                          itemBuilder: (BuildContext context, int index) {
+                            Random random = new Random();
+                            return Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: AppTheme.white,
+                              ),
+                              height: (random.nextInt(70) + 150).toDouble(),
+                            );
+                          },
+                          staggeredTileBuilder: (int index) =>
+                              new StaggeredTile.fit(2),
+                          mainAxisSpacing: 25.0,
+                          crossAxisSpacing: 25.0,
+                        )
+                      ],
+                    ),
+                  );
                 },
               ),
             ),

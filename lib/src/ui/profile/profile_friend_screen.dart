@@ -66,12 +66,6 @@ class _FriendProfileScreenState extends State<FriendProfileScreen> {
                         style: Styles.boldH1(AppTheme.dark),
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {},
-                      child: SvgPicture.asset(
-                        "assets/icon/settings.svg",
-                      ),
-                    ),
                   ],
                 ),
               ],
