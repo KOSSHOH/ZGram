@@ -25,6 +25,8 @@ class AppTheme {
   static const Color white80 = Color.fromRGBO(255, 255, 255, 0.8);
   static const Color white30 = Color.fromRGBO(255, 255, 255, 0.6);
   static const Color screen = Color(0xFFFAFAFA);
+  static const Color shimmerBase = Color(0xFFE5E5E5);
+  static const Color shimmerHighlight = Color(0xFFFCF9F9);
 
   ///fonts
   static const String fontNunitoSans = 'NunitoSans';

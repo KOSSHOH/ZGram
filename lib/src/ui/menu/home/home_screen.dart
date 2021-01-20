@@ -10,6 +10,7 @@ import 'package:messenger/src/ui/menu/home/notification_screen.dart';
 import 'package:messenger/src/ui/menu/main_screen.dart';
 import 'package:messenger/src/ui/profile/profile_friend_screen.dart';
 import 'package:messenger/src/utils/styles.dart';
+import 'package:shimmer/shimmer.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -418,7 +419,83 @@ class _HomeScreenState extends State<HomeScreen>
                       ],
                     );
                   }
-                  return Container();
+                  return Shimmer.fromColors(
+                    baseColor: AppTheme.shimmerBase,
+                    highlightColor: AppTheme.shimmerHighlight,
+                    child: ListView(
+                      padding: EdgeInsets.only(
+                        top: 0,
+                        bottom: 24,
+                      ),
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(
+                            top: 25,
+                          ),
+                          height: 92,
+                          child: ListView.builder(
+                            itemCount: 15,
+                            scrollDirection: Axis.horizontal,
+                            padding: EdgeInsets.only(left: 25),
+                            itemBuilder: (context, index) {
+                              return Column(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(
+                                      right: 25,
+                                      bottom: 6,
+                                    ),
+                                    height: 57,
+                                    width: 57,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(9),
+                                      color: AppTheme.white,
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.only(
+                                      right: 25,
+                                    ),
+                                    height: 12,
+                                    width: 57,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(9),
+                                      color: AppTheme.white,
+                                    ),
+                                  )
+                                ],
+                              );
+                            },
+                          ),
+                        ),
+                        ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: 20,
+                          padding: EdgeInsets.only(
+                            top: 0,
+                            bottom: 24,
+                          ),
+                          itemBuilder: (BuildContext context, int index) {
+                            return Container(
+                              margin: EdgeInsets.only(
+                                top: 30,
+                                left: 25,
+                                right: 25,
+                              ),
+                              decoration: BoxDecoration(
+                                color: AppTheme.white,
+                                borderRadius: BorderRadius.circular(
+                                  15,
+                                ),
+                              ),
+                              height: index % 2 == 0 ? 220 : 275,
+                            );
+                          },
+                        )
+                      ],
+                    ),
+                  );
                 },
               ),
             ),
