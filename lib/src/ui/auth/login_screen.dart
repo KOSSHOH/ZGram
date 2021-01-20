@@ -8,6 +8,7 @@ import 'package:messenger/src/app_theme.dart';
 import 'package:messenger/src/dialog/bottom_dialog.dart';
 import 'package:messenger/src/model/bus/loading_model.dart';
 import 'package:messenger/src/ui/auth/forgot_password_screen.dart';
+import 'package:messenger/src/ui/menu/main_screen.dart';
 import 'package:messenger/src/utils/styles.dart';
 import 'package:messenger/src/utils/utils.dart';
 import 'package:rxbus/rxbus.dart';
@@ -239,8 +240,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                 setState(() {
                                   loading = false;
                                 }),
-
-                                ///login
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => MainScreen(),
+                                  ),
+                                ),
                               }
                             else
                               {
@@ -386,8 +391,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                 setState(() {
                                   loading = false;
                                 }),
-
-                                ///login
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => MainScreen(),
+                                  ),
+                                ),
                               }
                             else
                               {

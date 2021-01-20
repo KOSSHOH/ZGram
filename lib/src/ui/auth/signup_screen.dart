@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:messenger/src/app_theme.dart';
+import 'package:messenger/src/ui/menu/main_screen.dart';
 import 'package:messenger/src/utils/styles.dart';
 import 'package:messenger/src/utils/utils.dart';
 
@@ -255,7 +256,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   setState(() {
                     loading = false;
                   });
-                  ///next screen
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MainScreen(),
+                    ),
+                  );
                 });
               }
             },
