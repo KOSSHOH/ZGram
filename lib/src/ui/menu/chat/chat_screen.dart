@@ -8,6 +8,7 @@ import 'package:messenger/src/dialog/bottom_dialog.dart';
 import 'package:messenger/src/model/chat_model.dart';
 import 'package:messenger/src/ui/menu/chat/chat_item_screen.dart';
 import 'package:messenger/src/utils/styles.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -226,7 +227,65 @@ class _ChatScreenState extends State<ChatScreen>
                       },
                     );
                   }
-                  return Container();
+                  return Shimmer.fromColors(
+                    baseColor: AppTheme.shimmerBase,
+                    highlightColor: AppTheme.shimmerHighlight,
+                    child: ListView.builder(
+                      itemCount: 15,
+                      padding: EdgeInsets.only(
+                        top: 30,
+                        bottom: 30,
+                      ),
+                      itemBuilder: (BuildContext context, int index) {
+                        return Container(
+                          margin: EdgeInsets.only(
+                            bottom: 40,
+                          ),
+                          padding: EdgeInsets.only(
+                            left: 25,
+                            right: 39,
+                          ),
+                          child: Row(
+                            children: [
+                              Container(
+                                height: 52,
+                                width: 52,
+                                decoration: BoxDecoration(
+                                  color: AppTheme.white,
+                                  borderRadius: BorderRadius.circular(52.0),
+                                ),
+                              ),
+                              SizedBox(width: 16),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      height: 21,
+                                      decoration: BoxDecoration(
+                                        color: AppTheme.white,
+                                        borderRadius: BorderRadius.circular(6),
+                                      ),
+                                    ),
+                                    SizedBox(height: 11),
+                                    Container(
+                                      height: 16,
+                                      margin: EdgeInsets.only(right: 25),
+                                      decoration: BoxDecoration(
+                                        color: AppTheme.white,
+                                        borderRadius: BorderRadius.circular(6),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  );
                 },
               ),
             ),
