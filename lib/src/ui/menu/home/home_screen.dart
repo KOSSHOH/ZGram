@@ -7,6 +7,7 @@ import 'package:messenger/src/bloc/home_bloc.dart';
 import 'package:messenger/src/dialog/bottom_dialog.dart';
 import 'package:messenger/src/model/home/home_model.dart';
 import 'package:messenger/src/ui/menu/home/notification_screen.dart';
+import 'package:messenger/src/ui/menu/home/story_screen.dart';
 import 'package:messenger/src/ui/menu/main_screen.dart';
 import 'package:messenger/src/ui/profile/profile_friend_screen.dart';
 import 'package:messenger/src/utils/styles.dart';
@@ -97,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen>
                             top: 25,
                           ),
                           color: AppTheme.screen,
-                          height: 92,
+                          height: 94,
                           child: ListView.builder(
                             itemCount: snapshot.data.story.length + 1,
                             scrollDirection: Axis.horizontal,
@@ -138,14 +139,26 @@ class _HomeScreenState extends State<HomeScreen>
                                             Text(
                                               "Add Story",
                                               maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
                                               style: Styles.regularBody(
-                                                  AppTheme.dark),
+                                                AppTheme.dark,
+                                              ),
                                             ),
                                           ],
                                         ),
                                       ),
                                     )
                                   : GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => StoryScreen(
+                                              index: index - 1,
+                                            ),
+                                          ),
+                                        );
+                                      },
                                       child: Container(
                                         margin: EdgeInsets.only(
                                           left: 8,
@@ -184,7 +197,8 @@ class _HomeScreenState extends State<HomeScreen>
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
                                               style: Styles.regularBody(
-                                                  AppTheme.dark),
+                                                AppTheme.dark,
+                                              ),
                                             ),
                                           ],
                                         ),
