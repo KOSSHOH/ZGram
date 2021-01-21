@@ -2,15 +2,43 @@
 
 A new Flutter application.
 
-## Getting Started
+## Screenshots
 
-This project is a starting point for a Flutter application.
+<table>
+  <tr>
+    <td>Today screen</td>
+     <td>Me screen</td>
+     <td>Settings screen</td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/KOSSHOH/shopping_figma_one/blob/master/screenshots/home.jpg"></td>
+    <td><img src="https://github.com/KOSSHOH/shopping_figma_one/blob/master/screenshots/me.jpg"></td>
+    <td><img src="https://github.com/KOSSHOH/shopping_figma_one/blob/master/screenshots/settings.jpg"></td>
+  </tr>
+</table>
 
-A few resources to get you started if this is your first Flutter project:
+<table>
+  <tr>
+    <td>Item all info screen</td>
+     <td>Sign in screen</td>
+     <td>Sign up screen</td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/KOSSHOH/shopping_figma_one/blob/master/screenshots/item.jpg"></td>
+    <td><img src="https://github.com/KOSSHOH/shopping_figma_one/blob/master/screenshots/sign_in.jpg"></td>
+    <td><img src="https://github.com/KOSSHOH/shopping_figma_one/blob/master/screenshots/sign_up.jpg"></td>
+  </tr>
+</table>
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<table>
+  <tr>
+    <td>Buy item screen</td>
+     <td>Add card screen</td>
+     <td>All card list screen</td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/KOSSHOH/shopping_figma_one/blob/master/screenshots/buy.jpg"></td>
+    <td><img src="https://github.com/KOSSHOH/shopping_figma_one/blob/master/screenshots/add_card.jpg"></td>
+    <td><img src="https://github.com/KOSSHOH/shopping_figma_one/blob/master/screenshots/card_list.jpg"></td>
+  </tr>
+</table>
