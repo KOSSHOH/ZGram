@@ -6,14 +6,14 @@ A new Flutter application.
 
 <table>
   <tr>
-    <td>Today screen</td>
-     <td>Me screen</td>
-     <td>Settings screen</td>
+    <td>Login screen</td>
+     <td>Sign Up screen</td>
+     <td>Forgot password screen</td>
   </tr>
   <tr>
-    <td><img src="https://github.com/KOSSHOH/shopping_figma_one/blob/master/screenshots/home.jpg"></td>
-    <td><img src="https://github.com/KOSSHOH/shopping_figma_one/blob/master/screenshots/me.jpg"></td>
-    <td><img src="https://github.com/KOSSHOH/shopping_figma_one/blob/master/screenshots/settings.jpg"></td>
+    <td><img src="https://github.com/KOSSHOH/messenger/blob/master/screenshots/login.png"></td>
+    <td><img src="https://github.com/KOSSHOH/messenger/blob/master/screenshots/sign_up.png"></td>
+    <td><img src="https://github.com/KOSSHOH/messenger/blob/master/screenshots/forgot.png"></td>
   </tr>
 </table>
 
