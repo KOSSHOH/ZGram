@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
@@ -21,11 +22,29 @@ class _ExploreScreenState extends State<ExploreScreen>
     with AutomaticKeepAliveClientMixin<ExploreScreen> {
   @override
   bool get wantKeepAlive => true;
+  bool isSearch = false;
+  bool isSearchAnim = false;
+  bool isEdit = false;
+  TextEditingController searchController = TextEditingController();
 
   @override
   void initState() {
     exploreBloc.fetchAllExplore();
     super.initState();
+  }
+
+  _ExploreScreenState() {
+    searchController.addListener(() {
+      if (searchController.text.length > 0) {
+        setState(() {
+          isEdit = true;
+        });
+      } else {
+        setState(() {
+          isEdit = false;
+        });
+      }
+    });
   }
 
   @override
@@ -37,31 +56,114 @@ class _ExploreScreenState extends State<ExploreScreen>
         children: [
           Container(
             color: AppTheme.white,
-            height: 96,
+            height: 120,
             padding: EdgeInsets.only(
               left: 25,
               right: 25,
-              bottom: 20,
+              bottom: isSearch ? 15 : 20,
             ),
             child: Column(
               children: [
                 Expanded(child: Container()),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        "Explore",
-                        style: Styles.boldH1(AppTheme.dark),
+                isSearch
+                    ? Row(
+                        children: [
+                          AnimatedContainer(
+                            duration: Duration(milliseconds: 300),
+                            width: isSearchAnim
+                                ? 0
+                                : MediaQuery.of(context).size.width - 78,
+                          ),
+                          Expanded(
+                            child: TextFormField(
+                              controller: searchController,
+                              style: Styles.semiBoldLabel(AppTheme.dark),
+                              decoration: InputDecoration(
+                                hintText: "Search here",
+                                hintStyle: Styles.regularLabel(AppTheme.grey),
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: AppTheme.grey40,
+                                    width: 0.5,
+                                  ),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: AppTheme.grey40,
+                                    width: 0.5,
+                                  ),
+                                ),
+                                prefixIcon: GestureDetector(
+                                  onTap: () {
+                                    if (isEdit) {
+                                      setState(() {
+                                        searchController.text = "";
+                                      });
+                                    } else {
+                                      setState(() {
+                                        isSearchAnim = false;
+                                      });
+
+                                      Timer(Duration(milliseconds: 300), () {
+                                        setState(() {
+                                          setState(() {
+                                            isSearch = false;
+                                          });
+                                        });
+                                      });
+                                    }
+                                  },
+                                  child: Container(
+                                    padding: EdgeInsets.only(
+                                      right: 16,
+                                      bottom: 16,
+                                      top: 16,
+                                    ),
+                                    child: isEdit
+                                        ? SvgPicture.asset(
+                                            "assets/icon/close.svg",
+                                            width: 24,
+                                            height: 24,
+                                          )
+                                        : SvgPicture.asset(
+                                            "assets/icon/search.svg",
+                                            width: 24,
+                                            height: 24,
+                                          ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      )
+                    : Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              "Explore",
+                              style: Styles.boldH1(AppTheme.dark),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                isSearch = true;
+                              });
+                              Timer(Duration(milliseconds: 10), () {
+                                setState(() {
+                                  setState(() {
+                                    isSearchAnim = true;
+                                  });
+                                });
+                              });
+                            },
+                            child: SvgPicture.asset(
+                              "assets/icon/search.svg",
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    GestureDetector(
-                      onTap: () {},
-                      child: SvgPicture.asset(
-                        "assets/icon/search.svg",
-                      ),
-                    ),
-                  ],
-                ),
               ],
             ),
           ),
