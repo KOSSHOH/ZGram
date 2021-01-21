@@ -1,4 +1,4 @@
-# Zgram
+# ZGram
 
 Flutter Social Mobile App Design for ZGram.
 The functionalities for this app:
