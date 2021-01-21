@@ -1,4 +1,4 @@
-# messenger
+# Zgram
 
 A new Flutter application.
 
