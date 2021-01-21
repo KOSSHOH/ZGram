@@ -32,13 +32,13 @@ A new Flutter application.
 
 <table>
   <tr>
-    <td>Buy item screen</td>
-     <td>Add card screen</td>
-     <td>All card list screen</td>
+    <td>Explore screen</td>
+     <td>Profile screen</td>
+     <td>Stories screen</td>
   </tr>
   <tr>
-    <td><img src="https://github.com/KOSSHOH/shopping_figma_one/blob/master/screenshots/buy.jpg"></td>
-    <td><img src="https://github.com/KOSSHOH/shopping_figma_one/blob/master/screenshots/add_card.jpg"></td>
-    <td><img src="https://github.com/KOSSHOH/shopping_figma_one/blob/master/screenshots/card_list.jpg"></td>
+    <td><img src="https://github.com/KOSSHOH/messenger/blob/master/screenshots/explore.png"></td>
+    <td><img src="https://github.com/KOSSHOH/messenger/blob/master/screenshots/profile.png"></td>
+    <td><img src="https://github.com/KOSSHOH/messenger/blob/master/screenshots/stories.png"></td>
   </tr>
 </table>
