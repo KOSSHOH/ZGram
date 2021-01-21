@@ -1,6 +1,12 @@
 # Zgram
 
-A new Flutter application.
+Flutter Social Mobile App Design for ZGram.
+The functionalities for this app:
+- login process
+- making friends (following, followers)
+- viewing the feed of the following friends
+- viewing stories of the following friends
+- uploading images to the user' account
 
 ## Screenshots
 
