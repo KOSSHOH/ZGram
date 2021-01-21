@@ -19,14 +19,14 @@ A new Flutter application.
 
 <table>
   <tr>
-    <td>Item all info screen</td>
-     <td>Sign in screen</td>
-     <td>Sign up screen</td>
+    <td>Home screen</td>
+     <td>Home item comment UI</td>
+     <td>Chat screen</td>
   </tr>
   <tr>
-    <td><img src="https://github.com/KOSSHOH/shopping_figma_one/blob/master/screenshots/item.jpg"></td>
-    <td><img src="https://github.com/KOSSHOH/shopping_figma_one/blob/master/screenshots/sign_in.jpg"></td>
-    <td><img src="https://github.com/KOSSHOH/shopping_figma_one/blob/master/screenshots/sign_up.jpg"></td>
+    <td><img src="https://github.com/KOSSHOH/messenger/blob/master/screenshots/home.png"></td>
+    <td><img src="https://github.com/KOSSHOH/messenger/blob/master/screenshots/comments.png"></td>
+    <td><img src="https://github.com/KOSSHOH/messenger/blob/master/screenshots/chats.png"></td>
   </tr>
 </table>
 
