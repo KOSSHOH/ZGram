@@ -5,8 +5,19 @@ import 'package:flutter/services.dart';
 import 'package:messenger/src/app_theme.dart';
 import 'package:messenger/src/ui/menu/main_screen.dart';
 import 'package:messenger/src/ui/onboarding.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+bool isLoginPage;
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  if (prefs.getString("name") != null) {
+    isLoginPage = true;
+  } else {
+    isLoginPage = false;
+  }
+
   await SystemChrome.setPreferredOrientations(
     <DeviceOrientation>[
       DeviceOrientation.portraitUp,
@@ -41,7 +52,7 @@ class MyApp extends StatelessWidget {
         textTheme: AppTheme.textTheme,
         platform: TargetPlatform.iOS,
       ),
-      home: OnBoarding(),
+      home: isLoginPage ? MainScreen() : OnBoarding(),
     );
   }
 }

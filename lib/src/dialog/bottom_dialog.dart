@@ -361,7 +361,7 @@ class BottomDialog {
 
             return Padding(
               padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom,
+                bottom: 4,
               ),
               child: Container(
                 height: 537,
